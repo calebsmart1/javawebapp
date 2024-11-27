@@ -1,14 +1,24 @@
-# Use the official Tomcat image
-FROM tomcat:9.0.96-jdk8-corretto
+# Use OpenJDK 17 as the base image
+FROM openjdk:17-slim
 
-# Remove the default ROOT application in Tomcat
-RUN rm -rf /usr/local/tomcat/webapps/ROOT
+# Install required dependencies and download Tomcat 11.0.1
+RUN apt-get update && apt-get install -y wget && \
+    wget https://downloads.apache.org/tomcat/tomcat-11/v11.0.1/bin/apache-tomcat-11.0.1.tar.gz && \
+    tar -xvf apache-tomcat-11.0.1.tar.gz && \
+    mv apache-tomcat-11.0.1 /usr/local/tomcat && \
+    rm apache-tomcat-11.0.1.tar.gz
 
-# Copy your application to the ROOT context
+# Clean up the default web apps
+RUN rm -rf /usr/local/tomcat/webapps/*
+
+# Copy the WAR file to Tomcat's webapps directory
 COPY ./target/mavenproject2-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
 
-# Expose the default Tomcat port
+# Expose port 8080
 EXPOSE 8080
 
+# Set environment variables for Tomcat
+ENV CATALINA_HOME=/usr/local/tomcat
+
 # Start Tomcat
-CMD ["catalina.sh", "run"]
+CMD ["sh", "/usr/local/tomcat/bin/catalina.sh", "run"]
