@@ -22,7 +22,7 @@ public class PostServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
-        response.getWriter().println("<h1>Testing! Testing!</h1>");
+        response.getWriter().println("<p>Welcome to the backend server! Click <a href='/'>here</a> to make a request.");
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
