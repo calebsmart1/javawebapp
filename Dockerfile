@@ -1,12 +1,12 @@
 # Use OpenJDK 17 as the base image
 FROM openjdk:17-slim
 
-# Install required dependencies and download Tomcat 11
+# Install required dependencies and download Tomcat 11.0.1
 RUN apt-get update && apt-get install -y wget && \
-    wget https://downloads.apache.org/tomcat/tomcat-11/v11.0.0-M9/bin/apache-tomcat-11.0.0-M9.tar.gz && \
-    tar -xvf apache-tomcat-11.0.0-M9.tar.gz && \
-    mv apache-tomcat-11.0.0-M9 /usr/local/tomcat && \
-    rm apache-tomcat-11.0.0-M9.tar.gz
+    wget https://downloads.apache.org/tomcat/tomcat-11/v11.0.1/bin/apache-tomcat-11.0.1.tar.gz && \
+    tar -xvf apache-tomcat-11.0.1.tar.gz && \
+    mv apache-tomcat-11.0.1 /usr/local/tomcat && \
+    rm apache-tomcat-11.0.1.tar.gz
 
 # Clean up the default web apps
 RUN rm -rf /usr/local/tomcat/webapps/*
