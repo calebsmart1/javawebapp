@@ -1,13 +1,13 @@
-# Use the official Tomcat image
-FROM tomcat:9.0.96-jdk8-corretto
+# Use Tomcat 11 base image
+FROM tomcat:11-jdk17-openjdk
 
-# Remove the default ROOT application in Tomcat
-RUN rm -rf /usr/local/tomcat/webapps/ROOT
+# Clean up default web apps and temporary files
+RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Copy your application to the ROOT context
-COPY ./target/mavenproject2-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
+# Copy the WAR file to Tomcat's webapps directory
+COPY ./target/ROOT.war /usr/local/tomcat/webapps/ROOT.war
 
-# Expose the default Tomcat port
+# Expose port 8080
 EXPOSE 8080
 
 # Start Tomcat
