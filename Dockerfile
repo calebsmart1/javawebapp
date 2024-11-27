@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y wget && \
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 # Copy the WAR file to Tomcat's webapps directory
-COPY ./target/ROOT.war /usr/local/tomcat/webapps/ROOT.war
+COPY ./target/mavenproject2-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
 
 # Expose port 8080
 EXPOSE 8080
